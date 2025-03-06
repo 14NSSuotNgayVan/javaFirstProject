@@ -16,7 +16,8 @@ public class UserService {
 
     public User createUser(UserCreationRequest request){
         User user = new User();
-
+    if(userRepository.existsByUsername(request.getUsername()))
+         throw new  RuntimeException("username is existed");
         user.setUsername(request.getUsername());
         user.setFirstName(request.getFirstName());
         user.setPassword(request.getPassword());
@@ -43,5 +44,9 @@ public class UserService {
         user.setDob(request.getDob());
 
         userRepository.save(user);
+    }
+
+    public void DeleteUser(String id){
+        userRepository.deleteById(id);
     }
 }
