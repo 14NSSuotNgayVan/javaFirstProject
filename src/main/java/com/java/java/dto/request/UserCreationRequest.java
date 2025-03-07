@@ -1,10 +1,12 @@
 package com.java.java.dto.request;
 
 import jakarta.validation.constraints.Size;
+import org.hibernate.validator.constraints.Length;
 
 import java.time.LocalDate;
 
 public class UserCreationRequest {
+    @Length(min  = 3, message = "Username must be at least 3 character")
     private String username;
     @Size(min = 8,message = "Password must be at least 8 characters")
     private String password;

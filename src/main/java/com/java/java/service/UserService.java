@@ -3,6 +3,8 @@ package com.java.java.service;
 import com.java.java.dto.request.UserCreationRequest;
 import com.java.java.dto.request.UserUpdateRequest;
 import com.java.java.entity.User;
+import com.java.java.exception.AppException;
+import com.java.java.exception.ErrorCode;
 import com.java.java.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +19,7 @@ public class UserService {
     public User createUser(UserCreationRequest request){
         User user = new User();
     if(userRepository.existsByUsername(request.getUsername()))
-         throw new  RuntimeException("username is existed");
+         throw new AppException(ErrorCode.USER_EXISTED);
         user.setUsername(request.getUsername());
         user.setFirstName(request.getFirstName());
         user.setPassword(request.getPassword());
